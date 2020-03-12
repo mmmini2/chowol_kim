@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chowol</title>
+     <!--파비콘-->
+    <link rel="icon" href="logo02.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+    
+    <style>
+
+        a {text-decoration: none; color: black;}
+        li{list-style-type: none;}
+        
+        body {
+            height: 2000px;
+            font-size: 16px;
+            font-family: 'Raleway', sans-serif;
+        }
+        body.static{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        #header {
+            position: relative;
+            height: 60px;
+            background-color: #fff;
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }  
+       #header.fixed {
+            position: fixed;
+            left: 0;
+            top: -60px;
+            width: 100%;
+        }
+        
+        
+        #desktop {
+            text-align: center;
+        }
+        #desktop li {
+            display: inline-block;
+        }
+        #desktop li a {
+            display: block; padding: 0 30px; line-height: 60px;
+            font-size: 16px;
+        }
+        #desktop li a:hover {
+            color: #888;
+        }
+        
+        
+        #mobile {
+            position: fixed;
+            left: -299px;
+            top: 0;
+            width: 240px;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            transition: left o.4s;
+            padding: 100px 0 0  50px;
+        }
+        #mobile.active {
+            left: 0;
+        }
+        #mobile a {
+            display: block;
+            line-height: 60px;
+            font-size: 16px;
+            border-bottom: 1px solid #eaeaea;
+        }
+        #mobile li a:hover {
+            color: white;
+        }
+        
+        #header .tab {
+            display: none;
+            position: absolute;
+            left: 10px;
+            top: 1px;
+            padding: 10px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+           
+        }
+        #header .tab span {
+            
+            display: block;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            text-indent: -9999px;
+           
+
+        }
+          
+        .dim {
+            display: none;
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .dim.dctive {
+            display: block;
+        }
+        
+        
+        @media only screen and (max-width: 760px) {
+            #desktop {
+                display: none;
+            }
+            #header .tab{
+                display: block;
+            }
+        }
+      
+    
+    </style>
+    
+</head>
+<body>
+    <div class="wrapper">
+        <header id="header">
+            <nav id="desktop">
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">2019</a></li>
+                    <li><a href="">2020</a></li>
+                    <li><a href="">DRAWING</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+            </nav>
+            <nav id="mobile">
+                <ul>
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">2019</a></li>
+                    <li><a href="">2020</a></li>
+                    <li><a href="">DRAWING</a></li>
+                    <li><a href="">CONTACT</a></li>
+                </ul>
+            </nav>
+            <a class="tab" href=""><span>tab</span><img src="spanimg.jpg" alt=""></a>
+        </header>
+        <div class="dim"></div>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script>
+        
+        $(function(){
+            $(".tab").click(function(e){
+                e.preventDefault();
+                $("body").addClass("static");
+                $("#mobile, .dim").addClass("active");
+            });
+            $(",dim").click(function(){
+                $("body").removeClass("static");
+                $("#mobile, .dim").removeClass("active");
+        
+            });
+            
+                   
+        //스크롤 할때 고정
+    $(function(){
+        
+    
+        var t=0;
+        
+        $(window).scroll(function(){
+            t=$(window).scrollTop();
+            console.log(t);
+            
+            if(t > 70){
+                $("#header").addClass("fixed");
+                $("#header").animate({top:0}, 300);
+            }else{
+                $("#header").removeClass("fixed");
+                $("#header").removeProp("style");
+            }
+        });
+    });
+        
+    </script>
+    
+</body>
+</html>
